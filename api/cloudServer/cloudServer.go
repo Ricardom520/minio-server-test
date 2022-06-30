@@ -38,7 +38,8 @@ func logBlock(c *gin.Context) {
 	uri, err := cloudServer.UploadMinio(logBlockData.Msg, logBlockData.Timestamp)
 
 	if err != nil {
-
+		panic(err)
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
