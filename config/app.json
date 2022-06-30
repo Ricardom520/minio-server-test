@@ -1,0 +1,14 @@
+{
+  "app_name": "minioServer",
+  "app_mode": "minioServer",
+  "appName": "127.0.0.1",
+  "appPort": "8090",
+  "minio": {
+    "endpoint": "127.0.0.1:9090",
+    "accessKeyID": "admin",
+    "secretAccesskey": "admin123",
+    "bucketName": "test1",
+    "location": "es-east-1",
+    "useSSL": false
+  }
+}
