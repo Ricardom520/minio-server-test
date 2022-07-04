@@ -62,5 +62,5 @@ func UploadMinio(msg, timestamp string) (uri string, err error){
 		fmt.Print("file remove OK!")
 	}
 
-	return "http://" + "172.29.139.32:14942" + "/" + cfg.Minio.BucketName + "/" + objectName, nil
+	return "https://fet.yy.com/reporter/files/" + cfg.Minio.BucketName + "/" + objectName, nil
 }
