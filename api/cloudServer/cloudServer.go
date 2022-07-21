@@ -17,6 +17,7 @@ func CsHandle(c *gin.Context) {
 
 func logBlock(c *gin.Context) {
 	type LogBlockData struct {
+		Bucket 		string 		`json:"bucket"`
 		Msg			string		`json:"msg"`
 		Timestamp 	string		`json:"timestamp"`
 		Level		string		`json:"level"`
@@ -35,7 +36,7 @@ func logBlock(c *gin.Context) {
 		return
 	}
 
-	uri, err := cloudServer.UploadMinio(logBlockData.Msg, logBlockData.Timestamp)
+	uri, err := cloudServer.UploadMinio(logBlockData.Msg, logBlockData.Timestamp, logBlockData.Bucket)
 
 	if err != nil {
 		panic(err)

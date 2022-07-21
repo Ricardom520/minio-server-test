@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func UploadMinio(msg, timestamp string) (uri string, err error){
+func UploadMinio(msg, timestamp, bucket string) (uri string, err error){
 	cfg, err := tool.ParseConfig("./config/app.json")
 	var path string
 	var log string
@@ -39,10 +39,16 @@ func UploadMinio(msg, timestamp string) (uri string, err error){
 		panic(err1.Error())
 	}
 
+	var bucketName string
 
+	if bucket != "" {
+		bucketName = bucket
+	} else {
+		bucketName = cfg.Minio.BucketName
+	}
 
 	// 使用PutObject上传文件
-	_, err2 := minioDocker.MinioClient.PutObject(context.Background(), cfg.Minio.BucketName, objectName, src, -1, minio.PutObjectOptions{ContentType: ".log"})
+	_, err2 := minioDocker.MinioClient.PutObject(context.Background(), bucketName, objectName, src, -1, minio.PutObjectOptions{ContentType: ".log"})
 
 	if err2 != nil {
 		return "", err2
@@ -62,5 +68,5 @@ func UploadMinio(msg, timestamp string) (uri string, err error){
 		fmt.Print("file remove OK!")
 	}
 
-	return "https://fet.yy.com/reporter/files/" + cfg.Minio.BucketName + "/" + objectName, nil
+	return "https://fet.yy.com/reporter/files/" + bucketName + "/" + objectName, nil
 }
